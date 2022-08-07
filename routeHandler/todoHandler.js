@@ -5,6 +5,23 @@ const todoSchema = require("../schemas/todoSchema");
 
 const Todo = new mongoose.model("Todo", todoSchema);
 
+// Get Active Todos using async await
+router.get("/active",  async(req, res) => {
+  const todo = new Todo();
+  const data = await todo.findActive();
+  res.status(200).json({
+  data,
+  })
+});
+// Get Inactive Todos using callback pattern
+router.get("/inactive",  (req, res) => {
+  const todo = new Todo();
+ todo.findInactive((err,data)=>{ res.status(200).json({
+  data,
+  })
+});
+ 
+});
 // Get All The Todos
 router.get("/",  (req, res) => {
    Todo.find({status: "active"}).select({

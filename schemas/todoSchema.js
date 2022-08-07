@@ -14,4 +14,13 @@ type:Date,
 default:Date.now,
 }
 });
+todoSchema.methods={
+findActive: function(){
+    return mongoose.model("Todo").find({status:'active'});
+},
+findInactive: function(cb){
+    return mongoose.model("Todo").find({status:'inactive'},cb);
+}
+}
+
 module.exports =todoSchema;
