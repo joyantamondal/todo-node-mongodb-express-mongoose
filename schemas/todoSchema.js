@@ -23,10 +23,17 @@ findInactive: function(cb){
     return mongoose.model("Todo").find({status:'inactive'},cb);
 }
 }
+
 // statics method
 todoSchema.statics ={
 findByJs: function(){
     return this.find({title:/js/i});
+}
+}
+// query helpers 
+todoSchema.query={
+byLanguage: function(language){
+    return this.find({title: new RegExp(language,"i")});
 }
 }
 module.exports =todoSchema;

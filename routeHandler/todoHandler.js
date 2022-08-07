@@ -32,6 +32,14 @@ router.get("/js", async(req, res) => {
     })
 });
 
+// Get Todos by Language  
+router.get("/language", async(req, res) => {
+  const data = await Todo.find().byLanguage("react");
+  res.status(200).json({
+    data,
+    })
+});
+
 // Get All The Todos
 router.get("/",  (req, res) => {
    Todo.find({status: "active"}).select({
