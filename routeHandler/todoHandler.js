@@ -13,6 +13,7 @@ router.get("/active",  async(req, res) => {
   data,
   })
 });
+
 // Get Inactive Todos using callback pattern
 router.get("/inactive",  (req, res) => {
   const todo = new Todo();
@@ -22,6 +23,15 @@ router.get("/inactive",  (req, res) => {
 });
  
 });
+
+// Get All Title containing  js  
+router.get("/js", async(req, res) => {
+  const data = await Todo.findByJs();
+  res.status(200).json({
+    data,
+    })
+});
+
 // Get All The Todos
 router.get("/",  (req, res) => {
    Todo.find({status: "active"}).select({
@@ -41,6 +51,7 @@ router.get("/",  (req, res) => {
     }
   });
 });
+
 //get a todo by id
 router.get("/:id", async (req, res) => {
   
@@ -54,6 +65,7 @@ router.get("/:id", async (req, res) => {
       }); 
     }
 });
+
 //post a todo
 router.post("/", async (req, res) => {
   const newTodo = new Todo(req.body);
