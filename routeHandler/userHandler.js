@@ -58,4 +58,22 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+// Get All Users 
+router.get('/all', async(req,res)=>{
+try{
+  const users= await User.find({
+  status: 'active'
+  }).populate("todos");
+  res.status(200).json({
+    data: users,
+  message: "Success"
+  })
+} catch(err){
+  console.log(err);
+  res.status(500).json({
+  message: "There was an error on the server side!"
+  })
+}
+})
 module.exports = router;
